@@ -28,12 +28,12 @@ class Login extends Component {
         });
     };
 
-    handleClick = () => {
+    handleClick = async () => {
         console.log(this.state.email,this.state.password);
         localStorage.setItem('name', this.state.name)
         localStorage.setItem('email',this.state.email)
         localStorage.setItem('loggedIn',true)
-        this.props.logIn()
+        await this.props.logIn()
     }
     render() {
         if(this.props.loggedIn) {
@@ -43,7 +43,7 @@ class Login extends Component {
         }
         return (
             <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center',height:'100vh',width:'100%'}} >
-                <Typography  variant="outlined" color="primary" variant="h2">Login</Typography>
+                <Typography  variant="h2" color="primary">Login</Typography>
                 <form autoComplete="off">
                     <div style={{width:'50vw', margin: '15px 0px'}}>
                         <TextField fullWidth value={this.state.name} name="name" id="outlined-basic" label="Name" variant="outlined" onChange={this.handleChange}/>

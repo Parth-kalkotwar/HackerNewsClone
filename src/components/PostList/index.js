@@ -250,7 +250,7 @@ class PostList extends Component {
                     (<div>Loading...</div>) : 
                     (
                         <div>
-                            {this.state.posts.map((post) => <Post post = {post} />)}
+                            {this.state.posts.map((post) => <Post key = {post.objectID} post = {post} />)}
                             <Pagination onChange={this.pageChange} style={{display:'flex', justifyContent:'center', padding:'15px 0px'}} variant="outlined" shape="rounded" page={this.state.page} count={this.state.pages} />
                         </div>
                     )
