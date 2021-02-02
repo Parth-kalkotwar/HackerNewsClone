@@ -32,6 +32,7 @@ class Login extends Component {
         console.log(this.state.email,this.state.password);
         localStorage.setItem('name', this.state.name)
         localStorage.setItem('email',this.state.email)
+        localStorage.setItem('loggedIn',true)
         this.props.logIn()
     }
     render() {

@@ -1,6 +1,7 @@
 import React from 'react'
 import Moment from 'react-moment';
 import { makeStyles } from '@material-ui/core/styles';
+import {Link} from 'react-router-dom'
 
 
 const useStyles = makeStyles(() => ({
@@ -64,42 +65,43 @@ const useStyles = makeStyles(() => ({
             <div className={classes.postRoot}>
                 <div className={classes.secondLine}>
                     {props.post.points ? <span>
-                        <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969', fontSize:'8px'}} className={classes.info}>
-                            {props.post.points}
-                        </button>
+                            <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969', fontSize:'14px'}} className={classes.info}>
+                                {props.post.points}
+                            </a>
+                        
                         <span className={classes.seperator}>
                             |
                         </span>
                     </span> : null}
                     
                     <span>
-                        <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969', fontSize:'8px'}} className={classes.info}>
+                        <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969', fontSize:'14px'}} className={classes.info}>
                             {props.post.author}
-                        </button>
+                        </a>
                         <span className={classes.seperator}>
                             |
                         </span>
                     </span>
                     <span>
-                        <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969', fontSize:'8px'}} className={classes.info}>
+                        <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969', fontSize:'14px'}} className={classes.info}>
                             <Moment fromNow>{props.post.created_at}</Moment>
-                        </button>
+                        </a>
                         <span className={classes.seperator}>
                             |
                         </span>
                     </span>
                     <span>
-                        <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969', fontSize:'8px'}} className={classes.info}>
+                        <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969', fontSize:'14px'}} className={classes.info}>
                             parent
-                        </button>
+                        </a>
                         <span className={classes.seperator}>
                             |
                         </span>
                     </span>
                     <span>
-                        <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969', fontSize:'8px'}} className={classes.info}>
+                        <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969', fontSize:'14px'}} className={classes.info}>
                             on: {props.post.story_title}
-                        </button>
+                        </a>
                     </span>
                 </div>
                 <div className={`${classes.firstLine} htmlContent`}>
@@ -112,39 +114,39 @@ const useStyles = makeStyles(() => ({
       <div className={classes.postRoot}>
           <div className={classes.firstLine}>
                 <div  className={classes.heading}>{props.post.title}</div>
-                {props.post.url ? <button className={classes.info} style={{textDecoration:'none', color:'#696969'}} onClick={() => console.log("clicked")}>({props.post.url})</button> : null}
+                {props.post.url ? <a href={props.post.url} className={classes.info} style={{textDecoration:'none', color:'#696969'}}>({props.post.url})</a> : null}
                 
           </div>
           <div className={classes.secondLine}>
               {props.post.points ? <span>
-                <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
+                <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
                     {props.post.points}
-                </button>
+                </a>
                 <span className={classes.seperator}>
                     |
                 </span>
             </span> : null}
             
             <span>
-                <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
+                <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
                     {props.post.author}
-                </button>
+                </a>
                 <span className={classes.seperator}>
                     |
                 </span>
             </span>
             <span>
-                <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
+                <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
                     <Moment fromNow>{props.post.created_at}</Moment>
-                </button>
+                </a>
                 <span className={classes.seperator}>
                     |
                 </span>
             </span>
             <span>
-                <button onClick={() => console.log("clicked")} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
+                <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
                     {props.post.num_comments}
-                </button>
+                </a>
             </span>
           </div>
           {props.post.story_text ? <div className={`htmlContent`}>

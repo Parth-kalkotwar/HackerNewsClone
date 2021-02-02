@@ -93,12 +93,12 @@ const styles = makeStyles((theme) => ({
 class PostList extends Component {
     constructor(props) {
         super(props);
-        this.state = { name: localStorage.getItem('name'), posts: null, tags: '', time: '', by: '',query:props.search,pages:'',qAdded:false,page:''};
+        this.state = { name: localStorage.getItem('name'), posts: null, tags: '', time: '', by: '',query:props.search,pages:'',qAdded:false,page:0};
         // tags:props.search, time:props.time, by:props.by, query:props.query,
     }
 
     fetchData = async () => {
-        let apiUrl = 'http://hn.algolia.com/api/v1/search';
+        let apiUrl = 'https://hn.algolia.com/api/v1/search';
         if(this.state.by==='Date') {
             apiUrl += '_by_date';
         }
@@ -147,7 +147,7 @@ class PostList extends Component {
 
     handleChange = async (event) => {
         const name = event.target.name;
-        console.log(event)
+        //console.log(event)
         await this.setState({
           ...this.state,
           [name]: event.target.value,
@@ -166,9 +166,6 @@ class PostList extends Component {
       render() {
         const { classes } = this.props;
         //console.log("her",this.state,classes)
-        if(!this.props.loggedIn) {
-            return <Redirect to="/login" />
-        }
         return (
             <div style={{width:'85%', backgroundColor:'#f6f6ef', margin:'auto'}}>
                 <AppBar position="static" style={{backgroundColor:'#ff742b', fontSize: '20px !important'}}>
