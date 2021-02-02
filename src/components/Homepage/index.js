@@ -5,9 +5,9 @@ import PostList from '../PostList';
 
 class Homepage extends Component {
     render() {
-        if(!localStorage.getItem('loggedIn')) {
-            return <Redirect to="/login" />
-        }
+        // if(!localStorage.getItem('loggedIn')) {
+        //     return <Redirect to="/login" />
+        // }
         return (
             <div>
                 <PostList />
