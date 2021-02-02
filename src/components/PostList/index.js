@@ -232,7 +232,7 @@ class PostList extends Component {
                             value={this.state.time}
                             onChange={this.handleChange}
                             name="time"
-                            className={[classes.selectEmpty, classes.buttons]}
+                            className={`${classes.selectEmpty} ${classes.buttons}`}
                             style={{border:'1px solid #c3c3c3', padding: '0 4px 0 8px',margin: '0 8px 0 2px',color:'#5c5c5c'}}
                             inputProps={{ 'aria-label': 'time' }}
                             >

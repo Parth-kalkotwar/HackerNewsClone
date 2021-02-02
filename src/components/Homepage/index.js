@@ -1,13 +1,14 @@
 import React, {Component} from 'react'
+import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import PostList from '../PostList';
 
 
 class Homepage extends Component {
     render() {
-        // if(!localStorage.getItem('loggedIn')) {
-        //     return <Redirect to="/login" />
-        // }
+        if(!this.props.loggedIn) {
+            return <Redirect to="/login" />
+        }
         return (
             <div>
                 <PostList />
@@ -16,4 +17,10 @@ class Homepage extends Component {
     }
 }
 
-export default Homepage;
+const mapStateToProps= (state) => {
+    return {
+        loggedIn: state.loggedIn
+    }
+}
+
+export default connect(mapStateToProps)(Homepage);
