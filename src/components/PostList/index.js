@@ -10,7 +10,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import InputBase from '@material-ui/core/InputBase';
 import { withStyles } from "@material-ui/core/styles";
 import { connect } from "react-redux";
-import { Redirect } from 'react-router-dom';
+import { Redirect, withRouter } from 'react-router-dom';
 
 
 const styles = makeStyles((theme) => ({
@@ -95,16 +95,18 @@ class PostList extends Component {
         super(props);
         this.state = { name: localStorage.getItem('name'), posts: null, tags: '', time: '', by: '',query:props.search,pages:'',qAdded:false,page:0};
         // tags:props.search, time:props.time, by:props.by, query:props.query,
+        console.log("Here",this.props)
     }
 
     fetchData = async () => {
-        let apiUrl = 'https://hn.algolia.com/api/v1/search';
+        let main = 'https://hn.algolia.com/api/v1/search'
+        let query = '';
         if(this.state.by==='Date') {
-            apiUrl += '_by_date';
+            query += '_by_date';
         }
-        apiUrl += '?query=' + this.state.query
+        query += '?query=' + this.state.query
         if(this.state.tags) {
-            apiUrl += '&tags=' + this.state.tags;
+            query += '&tags=' + this.state.tags;
             
         }
         if(this.state.time) {
@@ -113,32 +115,37 @@ class PostList extends Component {
                 case "last24h":
                     pre = Math.round((new Date().getTime() - (24 * 60 * 60 * 1000))/1000).toString();
                     cur = Math.round((new Date().getTime()/1000)).toString();
-                    apiUrl += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
+                    query += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
                     break;
                 case "pastWeek":
                     pre = Math.round((new Date().getTime() - (7 * 24 * 60 * 60 * 1000))/1000).toString();
                     cur = Math.round((new Date().getTime()/1000)).toString();
-                    apiUrl += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
+                    query += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
                     break;
                 case "pastMonth":
                     pre = Math.round((new Date().getTime() - (31 * 24 * 60 * 60 * 1000))/1000).toString();
                     cur = Math.round((new Date().getTime()/1000)).toString();
-                    apiUrl += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
+                    query += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
                     break;
                 case "pastYear":
                     pre = Math.round((new Date().getTime() - (365 * 24 * 60 * 60 * 1000))/1000).toString();
                     cur = Math.round((new Date().getTime()/1000)).toString();
-                    apiUrl += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
+                    query += `&numericFilters=created_at_i>${pre},created_at_i<${cur}`
                     break;
                 default:
                     break;
             }
         }
-        apiUrl += '&page=' + this.state.page
-        console.log(apiUrl)
-        const response = await fetch(apiUrl);
+        query += '&page=' + this.state.page
+        console.log(main+query)
+        const response = await fetch(main+query);
         const data = await response.json();
+        console.log(this.props.location.pathname)
         await this.setState({posts:data.hits, pages:data.nbPages,qAdded:false})
+        this.props.history.push({
+            pathname: query,
+        })
+        
     }
 
     async componentDidMount() {
@@ -171,9 +178,9 @@ class PostList extends Component {
                 <AppBar position="static" style={{backgroundColor:'#ff742b', fontSize: '20px !important'}}>
                     <Toolbar style={{minHeight:'45px !important', display: 'flex'}}>
                     <div className={classes.userNameText} style={{fontSize: '20px', padding: '2px 16px'}}>{this.state.name}</div>
-                    <div className={classes.search} style={{display:'flex', alignItems:'center', width:'80%'}}>
+                    <div className={classes.search} style={{display:'flex', alignItems:'center', width:'80%',backgroundColor:'white'}}>
                         <div className={classes.searchIcon}>
-                            <SearchIcon style={{paddingRight:'5px', fontSize:'2rem'}} />
+                            <SearchIcon style={{paddingRight:'5px', fontSize:'3rem',color:'ff742b', padding:'2px 8px'}} />
                         </div>
                         <InputBase
                         placeholder="Search stories by title, url or author"
@@ -268,5 +275,5 @@ const mapStateToProps = (state) => {
 }
 
 
-  export default connect(mapStateToProps)(withStyles(styles,{withTheme:true})(PostList));
+  export default withRouter(connect(mapStateToProps)(withStyles(styles,{withTheme:true})(PostList)));
   
