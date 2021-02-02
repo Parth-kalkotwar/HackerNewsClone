@@ -137,15 +137,14 @@ class PostList extends Component {
             }
         }
         query += '&page=' + this.state.page
-        console.log(main+query)
+        // console.log(main+query)
         const response = await fetch(main+query);
         const data = await response.json();
-        console.log(this.props.location.pathname)
+        // console.log(this.props.location.pathname)
         await this.setState({posts:data.hits, pages:data.nbPages,qAdded:false})
-        this.props.history.push({
-            pathname: query,
-        })
-        
+        // this.props.history.push({
+        //     pathname: query,
+        // })
     }
 
     async componentDidMount() {

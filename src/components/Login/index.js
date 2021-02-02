@@ -3,7 +3,7 @@ import { makeStyles, withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { Button, Typography } from '@material-ui/core';
 import { connect } from "react-redux";
-import { Redirect } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 
 const styles = makeStyles((theme) => ({
   root: {
@@ -37,9 +37,9 @@ class Login extends Component {
     }
     render() {
         if(this.props.loggedIn) {
-            return (
-                <Redirect to="/" />
-            )
+            this.props.history.push({
+                pathname: '/',
+            })
         }
         return (
             <div style={{display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center',height:'100vh',width:'100%'}} >
@@ -73,6 +73,6 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(withStyles(styles,{withTheme:true})(Login));
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(withStyles(styles,{withTheme:true})(Login)));
 
 
