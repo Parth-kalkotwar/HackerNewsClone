@@ -113,7 +113,8 @@ const useStyles = makeStyles(() => ({
     return (
       <div className={classes.postRoot}>
           <div className={classes.firstLine}>
-                <div  className={classes.heading}>{props.post.title}</div>
+            <a href={props.post.url} className={classes.info} style={{textDecoration:'none', color:'#696969'}}><div  className={classes.heading}>{props.post.title}</div></a>
+                
                 {props.post.url ? <a href={props.post.url} className={classes.info} style={{textDecoration:'none', color:'#696969'}}>({props.post.url})</a> : null}
                 
           </div>
@@ -126,7 +127,6 @@ const useStyles = makeStyles(() => ({
                     |
                 </span>
             </span> : null}
-            
             <span>
                 <a href={`https://news.ycombinator.com/item?id=${props.post.objectID}`} style={{textDecoration:'none', color:'#696969'}} className={classes.info}>
                     {props.post.author}
